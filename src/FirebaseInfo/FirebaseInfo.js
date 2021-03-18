@@ -10,5 +10,3 @@ if(firebaseInfo!="")
 {
 firebase.initializeApp(firebaseInfo)
 }
-
-export const authorize=firebase.auth();
