@@ -1,7 +1,7 @@
 
 import { firebase } from '@react-native-firebase/auth';
 import React, { useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert ,Keyboard} from 'react-native';
 import { StyleSheet, Text, View ,StatusBar} from 'react-native';
 import { Icon } from 'react-native-elements';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -21,6 +21,7 @@ const Signup =(props)=>{
     props.navigation.navigate('Login')
   }
   const onSignUp=async(email,password)=>{
+    Keyboard.dismiss()
       if(!email)
       {
           Alert.alert("Email can't be empty");

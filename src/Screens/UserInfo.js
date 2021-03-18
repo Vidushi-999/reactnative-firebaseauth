@@ -1,7 +1,7 @@
 
 import { firebase } from '@react-native-firebase/auth';
 import React, { useEffect, useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert,Keyboard } from 'react-native';
 import { BackHandler } from 'react-native';
 import { StatusBar, StyleSheet, Text, View } from 'react-native';
 import {TouchableOpacity} from 'react-native-gesture-handler'
@@ -27,7 +27,7 @@ const backButton = () => {
         onPress: () => console.log("Cancel Pressed"),
         style: "cancel"
       },
-      { text: "OK", onPress: () => props.navigation.pop() }
+      { text: "OK", onPress: () => LogoutFun() }
     ]
   );
 
@@ -42,23 +42,37 @@ const backHandler = BackHandler.addEventListener(
 return () => backHandler.remove();
 },[])
 
-  const onLogOut=async ()=>{
-try{
+const LogoutFun=async ()=>{
+  console.log("here")
+  try{
     await firebase.auth().signOut().then((res) => {
       console.log(res)
-        props.navigation.navigate('Login')
+        props.navigation.pop()
       })
-      .catch(error)
-      {
-          console.log("Error")
-      }
-    
+      
 
 }
 catch(e)
 {
     console.log("error",e)
 }
+
+}
+  const onLogOut=async ()=>{
+    
+    Keyboard.dismiss()
+    Alert.alert(
+      "Exit",
+      "Are you sure you want to logout?",
+      [
+        {
+          text: "Cancel",
+          onPress: () => console.log("Cancel Pressed"),
+          style: "cancel"
+        },
+        { text: "OK", onPress: () => LogoutFun() }
+      ]
+    );
   }
   
   

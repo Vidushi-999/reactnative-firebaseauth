@@ -1,6 +1,6 @@
 import { firebase } from '@react-native-firebase/auth';
 import React, { useState } from 'react';
-import { Alert } from 'react-native';
+import { Alert ,Keyboard} from 'react-native';
 import { StyleSheet, Text, View,StatusBar } from 'react-native';
 import { Icon } from 'react-native-elements';
 import { TextInput, TouchableOpacity } from 'react-native-gesture-handler';
@@ -16,7 +16,11 @@ const Login =(props)=>{
  
   const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-
+const onForgot=()=>{
+  props.navigation.navigate('ForgetPassword')
+  setemail("")
+  setpassword("")
+}
   const onDone= ()=>{
    
       props.navigation.navigate('SignUp')
@@ -50,6 +54,7 @@ const Login =(props)=>{
   
   
   const onLogin= async(email,password)=>{
+    Keyboard.dismiss()
       if(!email)
       {
           Alert.alert("Email cannot be empty")
@@ -134,7 +139,7 @@ const Login =(props)=>{
         </View>
 
 
-        <TouchableOpacity  onPress={()=>props.navigation.navigate('ForgetPassword')} style={{marginTop:20,borderRadius:30,paddingVertical: 12, paddingHorizontal: 12,justifyContent:'center'}}>
+        <TouchableOpacity  onPress={onForgot} style={{marginTop:20,borderRadius:30,paddingVertical: 12, paddingHorizontal: 12,justifyContent:'center'}}>
             <Text style={{textAlign:'right'}}>Forgot Password?</Text>
         </TouchableOpacity>
 
