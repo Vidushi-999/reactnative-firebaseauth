@@ -10,16 +10,16 @@ const ForgetPassword =(props)=>{
 
   const [email, setemail] = useState("");
  
-  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const EmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
 
-  const onForget= async(email)=>{
+  const OnForget= async(email)=>{
     Keyboard.dismiss()
     if(!email)
     {
       Alert.alert("Email can't be empty")
     }
-    else if(!emailRegex.test(email))
+    else if(!EmailRegex.test(email))
     {
   Alert.alert("Email is not in correct form")
    }
@@ -63,7 +63,7 @@ const ForgetPassword =(props)=>{
      style={styles.txtinputstyle}
      />
          <View style={{alignSelf:'center',marginTop:100,width:"70%"}}>
-          <TouchableOpacity  onPress={()=>onForget(email)}  style={{backgroundColor:"#add8e6",borderRadius:30,flexDirection:'row',elevation:8,paddingVertical: 10, paddingHorizontal: 12,justifyContent:'center'}}>
+          <TouchableOpacity  onPress={()=>OnForget(email)}  style={{backgroundColor:"#add8e6",borderRadius:30,flexDirection:'row',elevation:8,paddingVertical: 10, paddingHorizontal: 12,justifyContent:'center'}}>
    <Text>Send Link</Text>
           </TouchableOpacity>
         </View>

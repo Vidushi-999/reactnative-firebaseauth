@@ -13,11 +13,11 @@ const UserInfo =(props)=>{
   const [user,setuser]=useState("")
  
 useEffect(()=>{
- var emailid=firebase.auth().currentUser.email;
- var user=firebase.auth().currentUser.displayName;
-setemail(emailid)
-setuser(user)
-const backButton = () => {
+ var EmailId=firebase.auth().currentUser.email;
+ var User=firebase.auth().currentUser.displayName;
+setemail(EmailId)
+setuser(User)
+const BackButton = () => {
   Alert.alert(
     "Exit",
     "Are you sure you want to logout?",
@@ -34,12 +34,12 @@ const backButton = () => {
   return true;
 };
 
-const backHandler = BackHandler.addEventListener(
+const BackHandle = BackHandler.addEventListener(
   "hardwareBackPress",
-  backButton
+  BackButton
 );
 
-return () => backHandler.remove();
+return () => BackHandle.remove();
 },[])
 
 const LogoutFun=async ()=>{
@@ -58,7 +58,7 @@ catch(e)
 }
 
 }
-  const onLogOut=async ()=>{
+  const OnLogOut=async ()=>{
     
     Keyboard.dismiss()
     Alert.alert(
@@ -83,7 +83,7 @@ catch(e)
        <Text style={{textAlign:'center',fontSize:20}}>User Details</Text>
        <Text style={{fontSize:15,paddingHorizontal:8}}>Hello, {user}</Text>
        <Text style={{fontSize:15,paddingHorizontal:8}}>{email}</Text>
-       <TouchableOpacity  onPress={()=>onLogOut(email)}  style={{backgroundColor:"#add8e6",borderRadius:30,elevation:8,marginTop:80,paddingVertical:12,paddingHorizontal: 12,justifyContent:'center',width:"70%",alignSelf:'center'}}>
+       <TouchableOpacity  onPress={()=>OnLogOut(email)}  style={{backgroundColor:"#add8e6",borderRadius:30,elevation:8,marginTop:80,paddingVertical:12,paddingHorizontal: 12,justifyContent:'center',width:"70%",alignSelf:'center'}}>
    <Text style={{textAlign:'center'}}>Log Out</Text>
           </TouchableOpacity>
        </View>

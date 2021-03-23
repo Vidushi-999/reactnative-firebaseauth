@@ -14,53 +14,53 @@ const Login =(props)=>{
   const [eye,seteye]=useState("visibility-off")
   const [showpsswd,setshowpsswd]=useState(true)
  
-  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const EmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-const onForgot=()=>{
+const OnForgot=()=>{
   props.navigation.navigate('ForgetPassword')
   setemail("")
   setpassword("")
 }
-  const onDone= ()=>{
+  const OnDone= ()=>{
    
       props.navigation.navigate('SignUp')
       setemail("")
       setpassword("")
   }
-  changePwdType=()=>{
+  ChangePwdType=()=>{
   
-    let eyenew;
+    let EyeNew;
     if (showpsswd) {
-        eyenew = {
+        EyeNew = {
             eye: 'visibility',
             showpsswd: false,
             password: password
         }
     } else {
-        eyenew = {
+        EyeNew = {
             eye: 'visibility-off',
             showpsswd: true,
             password: password
         }
     }
   
-    setpassword(eyenew.password)
-    seteye(eyenew.eye)
-    setshowpsswd(eyenew.showpsswd)
+    setpassword(EyeNew.password)
+    seteye(EyeNew.eye)
+    setshowpsswd(EyeNew.showpsswd)
 
   }
 
   
   
   
-  const onLogin= async(email,password)=>{
+  const OnLogin= async(email,password)=>{
     Keyboard.dismiss()
       if(!email)
       {
           Alert.alert("Email cannot be empty")
       }
 
-      else if(!emailRegex.test(email))
+      else if(!EmailRegex.test(email))
       {
     Alert.alert("Email is not in correct form")
      }
@@ -71,8 +71,8 @@ const onForgot=()=>{
     }
   else{
     try{
-             const authuser=await firebase.auth().signInWithEmailAndPassword(email,password)
-             console.log(authuser)
+             const AuthUser=await firebase.auth().signInWithEmailAndPassword(email,password)
+             console.log(AuthUser)
            
              props.navigation.navigate('User')
              setemail("")
@@ -119,27 +119,27 @@ const onForgot=()=>{
                         name={eye}
                         size={30}
                         color="black"
-                        onPress={changePwdType}
+                        onPress={ChangePwdType}
                     />
                     </View>
                    
           </View>
 
           <View style={{alignSelf:'center',marginTop:100,width:"70%"}}>
-          <TouchableOpacity  onPress={()=>onLogin(email,password)}  style={{backgroundColor:"#add8e6",borderRadius:30,flexDirection:'row',elevation:8,paddingVertical: 10, paddingHorizontal: 12,justifyContent:'center'}}>
+          <TouchableOpacity  onPress={()=>OnLogin(email,password)}  style={{backgroundColor:"#add8e6",borderRadius:30,flexDirection:'row',elevation:8,paddingVertical: 10, paddingHorizontal: 12,justifyContent:'center'}}>
              <Text>Log In</Text>
           </TouchableOpacity>
         </View>
 
         <View style={{flexDirection:'row',justifyContent:'center',marginTop:10}}>
         <Text style={[styles.smalltext],{paddingTop:5}}>Don't have and account?</Text>
-             <TouchableOpacity onPress={onDone}>
+             <TouchableOpacity onPress={OnDone}>
                <Text style={[styles.smalltext],{paddingTop:5,color:"#add8e6",marginLeft:6}}>Sign Up</Text>
              </TouchableOpacity>
         </View>
 
 
-        <TouchableOpacity  onPress={onForgot} style={{marginTop:20,borderRadius:30,paddingVertical: 12, paddingHorizontal: 12,justifyContent:'center'}}>
+        <TouchableOpacity  onPress={OnForgot} style={{marginTop:20,borderRadius:30,paddingVertical: 12, paddingHorizontal: 12,justifyContent:'center'}}>
             <Text style={{textAlign:'right'}}>Forgot Password?</Text>
         </TouchableOpacity>
 

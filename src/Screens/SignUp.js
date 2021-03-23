@@ -15,18 +15,18 @@ const Signup =(props)=>{
   const [eye,seteye]=useState("visibility-off")
   const [showpsswd,setshowpsswd]=useState(true)
 
-  const emailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const EmailRegex = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-  const onDone=async ()=>{
+  const OnDone=async ()=>{
     props.navigation.navigate('Login')
   }
-  const onSignUp=async(email,password)=>{
+  const OnSignUp=async(email,password)=>{
     Keyboard.dismiss()
       if(!email)
       {
           Alert.alert("Email can't be empty");
       }
-      else if(!emailRegex.test(email))
+      else if(!EmailRegex.test(email))
       {
           Alert.alert("Email is not in the right format")
       }
@@ -36,10 +36,10 @@ const Signup =(props)=>{
       }
       else{
       try{
-          const emailid=await firebase.auth().createUserWithEmailAndPassword(email,password)
-          emailid.user.updateProfile({displayName:username})
-          emailid.user.reload()
-          console.log("email",emailid.user)
+          const Email=await firebase.auth().createUserWithEmailAndPassword(email,password)
+          Email.user.updateProfile({displayName:username})
+          Email.user.reload()
+          
           setusername("")
           setemail("")
           setpassword("")
@@ -64,25 +64,25 @@ const Signup =(props)=>{
     }
       
   }
-changePwdType=()=>{
-  let eyenew;
+ChangePwdType=()=>{
+  let EyeNew;
   if (showpsswd) {
-      eyenew = {
+      EyeNew = {
           eye: 'visibility',
           showpsswd: false,
           password: password
       }
   } else {
-      eyenew = {
+      EyeNew = {
           eye: 'visibility-off',
           showpsswd: true,
           password: password
       }
   }
   // set new state value
-  setpassword(eyenew.password)
-  seteye(eyenew.eye)
-  setshowpsswd(eyenew.showpsswd)
+  setpassword(EyeNew.password)
+  seteye(EyeNew.eye)
+  setshowpsswd(EyeNew.showpsswd)
 
 }
 
@@ -124,20 +124,20 @@ changePwdType=()=>{
                         name={eye}
                         size={30}
                         color="black"
-                        onPress={changePwdType}
+                        onPress={ChangePwdType}
                     />
                     </View>
   
           </View>
  
           <View style={styles.buttonview}>
-          <TouchableOpacity  onPress={()=>onSignUp(email,password)}  style={{backgroundColor:"#add8e6",borderRadius:30,flexDirection:'row',elevation:8,paddingVertical: 10, paddingHorizontal: 12,justifyContent:'center'}}>
+          <TouchableOpacity  onPress={()=>OnSignUp(email,password)}  style={{backgroundColor:"#add8e6",borderRadius:30,flexDirection:'row',elevation:8,paddingVertical: 10, paddingHorizontal: 12,justifyContent:'center'}}>
               <Text>Sign Up</Text>
           </TouchableOpacity>
         </View>
         <View style={styles.bottomview}>
         <Text style={[styles.smalltext],{paddingTop:5}}>Already have an account?</Text>
-        <TouchableOpacity onPress={onDone}>
+        <TouchableOpacity onPress={OnDone}>
             <Text style={[styles.smalltext],{paddingTop:5,color:"#add8e6",marginLeft:6}}>Log In</Text>
         </TouchableOpacity>
         </View>
